@@ -3,7 +3,6 @@
 
 #include <stdexcept>
 #include <string>
-#include "unoCard.hpp" // Assuming UnoCard defines Color and Value
 
 class InvalidPlayerTurnException : public std::runtime_error {
 private:
@@ -19,30 +18,30 @@ public:
 
 class InvalidColorSubmissionException : public std::runtime_error {
 private:
-    UnoCard::Color expected;
-    UnoCard::Color actual;
+    int expected;
+    int actual;
 public:
-    // Precondition: message must be a valid string, expectedColor and actualColor must be valid UnoCard::Color values
+    // Precondition: message must be a valid string, expectedColor and actualColor must be valid 
     // Postcondition: Initializes the exception with the specified message, expected color, and actual color
-    InvalidColorSubmissionException(const std::string& message, UnoCard::Color expectedColor, UnoCard::Color actualColor)
+    InvalidColorSubmissionException(const std::string& message, int expectedColor, int actualColor)
         : std::runtime_error(message), expected(expectedColor), actual(actualColor) {}
     
-    UnoCard::Color getExpected() const { return expected; }
-    UnoCard::Color getActual() const { return actual; }
+    int getExpected() const { return expected; }
+    int getActual() const { return actual; }
 };
 
 class InvalidValueSubmissionException : public std::runtime_error {
 private:
-    UnoCard::Value expected;
-    UnoCard::Value actual;
+    int expected;
+    int actual;
 public:
-    // Precondition: message must be a valid string, expectedValue and actualValue must be valid UnoCard::Value values
+    // Precondition: message must be a valid string, expectedValue and actualValue must be valid 
     // Postcondition: Initializes the exception with the specified message, expected value, and actual value
-    InvalidValueSubmissionException(const std::string& message, UnoCard::Value expectedValue, UnoCard::Value actualValue)
+    InvalidValueSubmissionException(const std::string& message, int expectedValue, int actualValue)
         : std::runtime_error(message), expected(expectedValue), actual(actualValue) {}
     
-    UnoCard::Value getExpected() const { return expected; }
-    UnoCard::Value getActual() const { return actual; }
+    int getExpected() const { return expected; }
+    int getActual() const { return actual; }
 };
 
 #endif // EXCEPTIONS_H

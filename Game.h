@@ -12,22 +12,22 @@
 #include <stdexcept>
 #include "unoCard.hpp"
 #include "UnoDeck.h"
-#include "Exceptions.h"
+#include "Exceptions.hpp"
 
 class Game {
 private:
     int currentPlayer; // current player
     std::vector<std::string> playerIds; // array of player names
 
-    UnoDeck deck; // deck of cards
+    unoDeck deck; // deck of cards
 
-    std::vector<std::vector<UnoCard>> playerHands; // array of player hands, has to be like this since every particular 
+    std::vector<std::vector<unoCard>> playerHands; // array of player hands, has to be like this since every particular 
     // player hand is its own array and we are keeping track of that 
     
-    std::vector<UnoCard> stockpile; // array of cards in the stockpile, happens when you place down a card
+    std::vector<unoCard> stockpile; // array of cards in the stockpile, happens when you place down a card
 
-    UnoCard::Color validColor;
-    UnoCard::Value validValue;
+    unoCard::colourVal validColor;
+    unoCard::value validValue;
 
 public:
     // Precondition: none
@@ -46,7 +46,7 @@ public:
 
     // Precondition: validColor and validValue must be initialized and valid
     // Postcondition: Returns a new UnoCard using these values; object state is unchanged
-    UnoCard getTopCard() const;
+    unoCard getTopCard() const;
 
     // Precondition: validColor and validValue must be initialized and valid
     // Postcondition: Returns a new ImageIcon corresponding to the top card; object state is unchanged
@@ -70,7 +70,7 @@ public:
 
     // Precondition: playerIndex must be a valid index in the playerHands vector
     // Postcondition: Returns a vector of UnoCards representing the hand of the player at the specified index
-    std::vector<UnoCard> getPlayerHand(int playerIndex) const;
+    std::vector<unoCard> getPlayerHand(int playerIndex) const;
 
     // Precondition: pid must be a valid player ID
     // Postcondition: Returns the number of cards in the hand of the player with the specified ID; object state is unchanged
@@ -78,7 +78,7 @@ public:
 
     // Precondition: pid must be a valid player ID, and cardIndex must be a valid index in the player's hand
     // Postcondition: Returns the UnoCard at the specified index in the hand of the player
-    UnoCard getPlayerCard(std::string pid, int cardIndex) const;
+    unoCard getPlayerCard(std::string pid, int cardIndex) const;
 
     // Precondition: pid must be a valid player ID
     // Postcondition: Returns true if the player with the specified ID has no cards left
@@ -86,7 +86,7 @@ public:
 
     // Precondition: card must be a valid UnoCard
     // Postcondition: Returns true if the specified card can be played on the current top card, based on color or value; object state is unchanged
-    bool validCardPlay(UnoCard card) const;
+    bool validCardPlay(unoCard card) const;
 
     // Precondition: pid must be a valid player ID
     // Postcondition: Checks if it's the turn of the player with the specified ID; throws an exception if invalid
@@ -98,11 +98,11 @@ public:
 
     // Precondition: color must be a valid UnoCard::Color
     // Postcondition: Sets the validColor to the specified color; object state is updated
-    void setCardColor(UnoCard::Color color);
+    void setCardColor(unoCard::colourVal color);
 
     // Precondition: pid must be a valid player ID, card must be a valid UnoCard, and declaredColor must be a valid UnoCard::Color
     // Postcondition: Submits the specified card for the player with the specified ID, checks for validity, and updates the game state accordingly; throws exceptions if the submission is invalid
-    void submitPlayerCard(const std::string& pid, const UnoCard& card, UnoCard::Color declaredColor);
+    void submitPlayerCard(const std::string& pid, const unoCard& card, unoCard::colourVal declaredColor);
 };
 
 #endif // GAME_H
